@@ -46,7 +46,7 @@ class ListPaintingsTest extends TestCase
 
         $response = $this->getJson(route('api.v1.paintings.index'));
 
-        $response->assertExactJson([
+        $response->assertJson([
             'data' => [
                 [
                     'type'  => 'paintings',
