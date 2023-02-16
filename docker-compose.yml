@@ -1,0 +1,35 @@
+version: "3.4"
+
+services:
+  extendeal_webapp:
+    build:
+      context: ./
+    ports:
+      - "${APP_PORT:-8095}:80"
+    networks:
+      - extendeal_network
+    volumes:
+      - .:/var/www/html:cached
+
+  extendeal_db:
+    image: postgres:9.6-alpine
+    environment:
+      DB_HOST: ${DB_HOST:-extendeal_db}
+      DB_PORT: ${DB_PORT:-5432}
+      POSTGRES_USER: ${DB_USERNAME:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+      POSTGRES_DB: ${DB_DATABASE:-extendeal}
+    ports:
+      - "${DB_PORT_EXPOSED:-5440}:5432"
+    networks:
+      - extendeal_network
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./backups:/backups
+      - ./scripts:/root/bin
+
+networks:
+  extendeal_network:
+
+volumes:
+  postgres:
