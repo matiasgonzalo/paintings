@@ -2,26 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('paintings/{painting}', 'PaintingController@show')
-        ->name('api.v1.paintings.show');
+Route::prefix('oauth')->group(function () {
+        // passport
+        Route::post('/login', 'AuthController@login');
+        Route::post('/resetpass', 'AuthController@sendResetLinkEmail');
+        Route::get('/find/{token}', 'AuthController@showResetForm');
+        Route::post('/reset', 'AuthController@reset');
+});
 
-Route::get('paintings', 'PaintingController@index')
-        ->name('api.v1.paintings.index');
+Route::middleware([])->group(function () {
+        Route::get('paintings/{painting}', 'PaintingController@show')
+                ->name('api.v1.paintings.show');
 
-Route::post('paintings', 'PaintingController@store')
-        ->name('api.v1.paintings.store');
+        Route::get('paintings', 'PaintingController@index')
+                ->name('api.v1.paintings.index');
 
-Route::patch('paintings/{painting}', 'PaintingController@update')
-        ->name('api.v1.paintings.update');
+        Route::post('paintings', 'PaintingController@store')
+                ->name('api.v1.paintings.store');
 
-Route::delete('paintings/{painting}', 'PaintingController@destroy')
-        ->name('api.v1.paintings.destroy');
+        Route::patch('paintings/{painting}', 'PaintingController@update')
+                ->name('api.v1.paintings.update');
 
-Route::get('users/{user}', 'UserController@show')
-        ->name('api.v1.users.show');
+        Route::delete('paintings/{painting}', 'PaintingController@destroy')
+                ->name('api.v1.paintings.destroy');
 
-Route::get('users', 'UserController@index')
-        ->name('api.v1.users.index');
+        Route::get('users/{user}', 'UserController@show')
+                ->name('api.v1.users.show');
 
-Route::post('users', 'UserController@store')
-        ->name('api.v1.users.store');
+        Route::get('users', 'UserController@index')
+                ->name('api.v1.users.index');
+
+        Route::post('users', 'UserController@store')
+                ->name('api.v1.users.store');
+});

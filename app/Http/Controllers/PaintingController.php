@@ -19,22 +19,11 @@ class PaintingController extends Controller
      */
     public function index() :PaintingCollection
     {
-        $paintings = Painting::allowedSorts(Painting::$allowedSorts);
+        $paintings = Painting::allowedSorts(Painting::$allowedSorts)
+                                ->allowedFilters(Painting::$allowedFilters)
+                                ->jsonPaginate();
 
-        //filters
-        foreach (request('filter', []) as $filter => $value) {
-            abort_unless(in_array($filter, Painting::$allowedFilters), 400);
-            $paintings->{$filter}($value);
-        }
-
-        return PaintingCollection::make(
-            $paintings->paginate(
-                $perPage = request('page.size', 15),
-                $columns = ['*'],
-                $pageName = 'page[number]',
-                $page = request('page.number', 1)
-            )->appends(request()->only('sort', 'page.size'))
-        );
+        return PaintingCollection::make($paintings);
     }
 
     /**

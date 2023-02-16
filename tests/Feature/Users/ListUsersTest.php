@@ -40,7 +40,7 @@ class ListUsersTest extends TestCase
 
         $response = $this->getJson(route('api.v1.users.index'));
 
-        $response->assertExactJson([
+        $response->assertJson([
             'data' => [
                 [
                     'type'  => 'users',

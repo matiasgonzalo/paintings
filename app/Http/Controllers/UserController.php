@@ -18,7 +18,11 @@ class UserController extends Controller
      */
     public function index() :UserCollection
     {
-        return UserCollection::make(User::all());
+        $users = User::allowedSorts(User::$allowedSorts)
+                                ->allowedFilters(User::$allowedFilters)
+                                ->jsonPaginate();
+
+        return UserCollection::make($users);
     }
 
     /**
