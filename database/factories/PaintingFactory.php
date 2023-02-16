@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Painting::class, function (Faker $faker) {
     return [
-        'name'      => $this->faker->name,
+        'name'      => $this->faker->unique()->name,
         'code'      => $this->faker->regexify('[A-Za-z0-9]{250}'),
         'painter'   => $this->faker->name,
         'country'   => $this->faker->country,

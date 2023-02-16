@@ -15,8 +15,8 @@ class CreatePaintingsTable extends Migration
     {
         Schema::create('paintings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
-            $table->string('name');
+            $table->string('code')->unique();
+            $table->string('name')->unique();
             $table->string('painter');
             $table->string('country');
             $table->date('date');

@@ -19,7 +19,9 @@ class PaintingController extends Controller
      */
     public function index() :PaintingCollection
     {
-        return PaintingCollection::make(Painting::all());
+        $paintings = Painting::allowedSorts(['name', 'painter', 'date', 'style', 'country']);
+
+        return PaintingCollection::make($paintings->get());
     }
 
     /**
