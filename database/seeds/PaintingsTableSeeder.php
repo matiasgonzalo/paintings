@@ -3,7 +3,7 @@
 use App\Painting;
 use Illuminate\Database\Seeder;
 
-class PaintingSeeder extends Seeder
+class PaintingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

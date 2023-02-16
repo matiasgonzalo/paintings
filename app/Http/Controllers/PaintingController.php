@@ -15,7 +15,7 @@ class PaintingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return PaintingCollection
      */
     public function index() :PaintingCollection
     {
@@ -25,10 +25,10 @@ class PaintingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  PaintingStoreRequest  $request
+     * @return PaintingResource
      */
-    public function store(PaintingStoreRequest $request)
+    public function store(PaintingStoreRequest $request) :PaintingResource
     {
         $painting = Painting::create($request->input('data.attributes'));
 
@@ -39,7 +39,7 @@ class PaintingController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Painting  $painting
-     * @return \Illuminate\Http\Response
+     * @return PaintingResource
      */
     public function show(Painting $painting) :PaintingResource
     {
@@ -49,9 +49,9 @@ class PaintingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PaintingUpdateRequest  $request
      * @param  \App\Painting  $painting
-     * @return \Illuminate\Http\Response
+     * @return PaintingResource
      */
     public function update(PaintingUpdateRequest $request, Painting $painting) :PaintingResource
     {
