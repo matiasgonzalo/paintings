@@ -19,7 +19,13 @@ class PaintingController extends Controller
      */
     public function index() :PaintingCollection
     {
-        $paintings = Painting::allowedSorts(['name', 'painter', 'date', 'style', 'country']);
+        $paintings = Painting::allowedSorts(Painting::$allowedSorts);
+
+        //filters
+        foreach (request('filter', []) as $filter => $value) {
+            abort_unless(in_array($filter, Painting::$allowedFilters), 400);
+            $paintings->{$filter}($value);
+        }
 
         return PaintingCollection::make(
             $paintings->paginate(
