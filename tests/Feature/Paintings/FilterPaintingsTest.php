@@ -126,9 +126,9 @@ class FilterPaintingsTest extends TestCase
                             ]));
         $response->assertJsonCount(1, 'data');
 
-        $response->assertSee('25');
+        $response->assertSee('2022-01-25');
 
-        $response->assertDontSee('28');
+        $response->assertDontSee('2023-01-28');
     }
 
     /** @test */

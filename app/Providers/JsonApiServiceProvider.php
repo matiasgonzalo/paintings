@@ -60,5 +60,18 @@ class JsonApiServiceProvider extends ServiceProvider
 
             return $this;
         });
+
+        Builder::macro('sparceFieldSet', function() {
+            if (request()->filled('fields.paintings')) {
+                $fields = explode(',', request('fields.paintings'));
+
+                if (!in_array('id', $fields)) {
+                    $fields[] = 'id';
+                }
+
+                return $this->addSelect($fields);
+            }
+            return $this;
+        });
     }
 }

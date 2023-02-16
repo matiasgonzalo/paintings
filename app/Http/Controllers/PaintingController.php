@@ -21,6 +21,7 @@ class PaintingController extends Controller
     {
         $paintings = Painting::allowedSorts(Painting::$allowedSorts)
                                 ->allowedFilters(Painting::$allowedFilters)
+                                ->sparceFieldSet()
                                 ->jsonPaginate();
 
         return PaintingCollection::make($paintings);

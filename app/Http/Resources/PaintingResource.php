@@ -17,7 +17,7 @@ class PaintingResource extends JsonResource
         return [
             'type' => 'paintings',
             'id' => $this->resource->getRouteKey(),
-            'attributes' => [
+            'attributes' => array_filter([
                 'code'      => $this->resource->code, 
                 'name'      => $this->resource->name, 
                 'painter'   => $this->resource->painter, 
@@ -26,7 +26,7 @@ class PaintingResource extends JsonResource
                 'style'     => $this->resource->style, 
                 'width'     => $this->resource->width, 
                 'hight'     => $this->resource->hight
-            ],
+            ]),
             'links' => [
                 'self' => route('api.v1.paintings.show', $this->resource)
             ]

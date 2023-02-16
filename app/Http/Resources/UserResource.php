@@ -17,10 +17,10 @@ class UserResource extends JsonResource
         return [
             'type' => 'users', 
             'id' => $this->resource->getRouteKey(), 
-            'attributes' => [
+            'attributes' => array_filter([
                 'name'      => $this->resource->name, 
                 'email'     => $this->resource->email
-            ],
+            ]),
             'links' => [
                 'self' => route('api.v1.users.show', $this->resource) 
             ]
