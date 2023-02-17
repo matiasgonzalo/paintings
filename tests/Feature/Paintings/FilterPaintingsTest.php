@@ -35,7 +35,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[name]=My
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'name' => 'My'
                                 ]
@@ -68,7 +70,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[painter]=Matias
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'painter' => 'Matias'
                                 ]
@@ -101,7 +105,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[month]=2022
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'year' => 2022
                                 ]
@@ -134,7 +140,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[month]=07
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'month' => 07
                                 ]
@@ -167,7 +175,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[day]=25
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'day' => 25
                                 ]
@@ -200,7 +210,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[date]=2022-01-01
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'date' => '2022-01-01'
                                 ]
@@ -233,7 +245,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[country]=Argentina
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'country' => 'Argentina'
                                 ]
@@ -266,7 +280,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[style]=Clasico
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'style' => 'Clasico'
                                 ]
@@ -299,7 +315,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[width]=1500
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'width' => 1500
                                 ]
@@ -332,7 +350,9 @@ class FilterPaintingsTest extends TestCase
         ]);
 
         // paintings?filter[hight]=3500
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'hight' => 3500
                                 ]
@@ -359,7 +379,9 @@ class FilterPaintingsTest extends TestCase
         factory(Painting::class, 2)->create();
 
         // paintings?filter[unknown]=unknown
-        $response = $this->getJson(route('api.v1.paintings.index', [
+        $response = $this->withHeaders([
+                                'X-HTTP-USER-ID' => $ruben->id
+                            ])->getJson(route('api.v1.paintings.index', [
                                 'filter' => [
                                     'unknown' => 'unknown'
                                 ]

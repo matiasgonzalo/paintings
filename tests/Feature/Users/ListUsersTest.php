@@ -27,7 +27,9 @@ class ListUsersTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        $response = $this->getJson(route('api.v1.users.show', $user));
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $matias->id
+                        ])->getJson(route('api.v1.users.show', $user));
 
         $response->assertJson([
             'data' => [
@@ -60,7 +62,9 @@ class ListUsersTest extends TestCase
 
         $users = User::all();
 
-        $response = $this->getJson(route('api.v1.users.index'));
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $matias->id
+                        ])->getJson(route('api.v1.users.index'));
 
         $response->assertJson([
             'data' => [

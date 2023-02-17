@@ -26,7 +26,10 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])
+            ->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -84,7 +87,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -114,7 +119,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -144,7 +151,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -174,7 +183,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -204,7 +215,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -234,7 +247,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -264,7 +279,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [
@@ -294,7 +311,9 @@ class CreatePaintingTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.paintings.store'), [
+        $response = $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
                 'attributes' => [

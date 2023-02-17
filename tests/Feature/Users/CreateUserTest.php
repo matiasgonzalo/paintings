@@ -25,16 +25,18 @@ class CreateUserTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.users.store'), [
-            'data' => [
-                'type' => 'users',
-                'attributes' => [
-                    'name'      => 'David',
-                    'email'     => 'david@gmail.com',
-                    'password'  => 'password'
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                        'X-HTTP-USER-ID' => $matias->id
+                    ])->postJson(route('api.v1.users.store'), [
+                        'data' => [
+                            'type' => 'users',
+                            'attributes' => [
+                                'name'      => 'David',
+                                'email'     => 'david@gmail.com',
+                                'password'  => 'password'
+                            ]
+                        ]
+                    ]);
 
         $response->assertCreated();
 
@@ -72,15 +74,17 @@ class CreateUserTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.users.store'), [
-            'data' => [
-                'type' => 'users',
-                'attributes' => [
-                    'email'     => 'david@gmail.com',
-                    'password'  => 'password'
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $matias->id
+                        ])->postJson(route('api.v1.users.store'), [
+                            'data' => [
+                                'type' => 'users',
+                                'attributes' => [
+                                    'email'     => 'david@gmail.com',
+                                    'password'  => 'password'
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.name');
     }
@@ -97,15 +101,17 @@ class CreateUserTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.users.store'), [
-            'data' => [
-                'type' => 'users',
-                'attributes' => [
-                    'name'      => 'David',
-                    'password'  => 'password'
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $matias->id
+                        ])->postJson(route('api.v1.users.store'), [
+                            'data' => [
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name'      => 'David',
+                                    'password'  => 'password'
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.email');
     }
@@ -122,15 +128,17 @@ class CreateUserTest extends TestCase
             ['create-servers']
         );
 
-        $response = $this->postJson(route('api.v1.users.store'), [
-            'data' => [
-                'type' => 'users',
-                'attributes' => [
-                    'name'      => 'David',
-                    'email'     => 'david@gmail.com'
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $matias->id
+                        ])->postJson(route('api.v1.users.store'), [
+                            'data' => [
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name'      => 'David',
+                                    'email'     => 'david@gmail.com'
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.password');
     }

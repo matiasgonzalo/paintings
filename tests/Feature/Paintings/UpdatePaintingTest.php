@@ -28,21 +28,23 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'codigo actualizado',
-                    'name'      => 'nombre actualizado',
-                    'painter'   => 'Monalisa',
-                    'country'   => 'Argentina',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                        'X-HTTP-USER-ID' => $ruben->id
+                    ])->patchJson(route('api.v1.paintings.update', $painting), [
+                        'data' => [
+                            'type' => 'paintings',
+                            'attributes' => [
+                                'code'      => 'codigo actualizado',
+                                'name'      => 'nombre actualizado',
+                                'painter'   => 'Monalisa',
+                                'country'   => 'Argentina',
+                                'date'      => '1993-01-01',
+                                'style'     => 'Clasico',
+                                'width'     => 1000,
+                                'hight'     => 1000
+                            ]
+                        ]
+                    ]);
 
         $response->assertOk();
 
@@ -88,20 +90,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'name'      => 'Matias',
-                    'painter'   => 'Monalisa',
-                    'country'   => 'Argentina',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'name'      => 'Matias',
+                                    'painter'   => 'Monalisa',
+                                    'country'   => 'Argentina',
+                                    'date'      => '1993-01-01',
+                                    'style'     => 'Clasico',
+                                    'width'     => 1000,
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.code');
     }
@@ -120,20 +124,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'painter'   => 'Monalisa',
-                    'country'   => 'Argentina',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'painter'   => 'Monalisa',
+                                    'country'   => 'Argentina',
+                                    'date'      => '1993-01-01',
+                                    'style'     => 'Clasico',
+                                    'width'     => 1000,
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.name');
     }
@@ -152,20 +158,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'name'      => 'Matias',
-                    'country'   => 'Argentina',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'name'      => 'Matias',
+                                    'country'   => 'Argentina',
+                                    'date'      => '1993-01-01',
+                                    'style'     => 'Clasico',
+                                    'width'     => 1000,
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.painter');
     }
@@ -184,20 +192,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'name'      => 'Matias',
-                    'painter'   => 'Monalisa',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'name'      => 'Matias',
+                                    'painter'   => 'Monalisa',
+                                    'date'      => '1993-01-01',
+                                    'style'     => 'Clasico',
+                                    'width'     => 1000,
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.country');
     }
@@ -216,20 +226,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'name'      => 'Matias',
-                    'country'   => 'Argentina',
-                    'painter'   => 'Monalisa',
-                    'style'     => 'Clasico',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'name'      => 'Matias',
+                                    'country'   => 'Argentina',
+                                    'painter'   => 'Monalisa',
+                                    'style'     => 'Clasico',
+                                    'width'     => 1000,
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.date');
     }
@@ -248,20 +260,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'name'      => 'Matias',
-                    'country'   => 'Argentina',
-                    'painter'   => 'Monalisa',
-                    'date'      => '1993-01-01',
-                    'width'     => 1000,
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'name'      => 'Matias',
+                                    'country'   => 'Argentina',
+                                    'painter'   => 'Monalisa',
+                                    'date'      => '1993-01-01',
+                                    'width'     => 1000,
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.style');
     }
@@ -280,20 +294,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'name'      => 'Matias',
-                    'country'   => 'Argentina',
-                    'painter'   => 'Monalisa',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'hight'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'name'      => 'Matias',
+                                    'country'   => 'Argentina',
+                                    'painter'   => 'Monalisa',
+                                    'date'      => '1993-01-01',
+                                    'style'     => 'Clasico',
+                                    'hight'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.width');
     }
@@ -312,20 +328,22 @@ class UpdatePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
-            'data' => [
-                'type' => 'paintings',
-                'attributes' => [
-                    'code'      => 'abcdefghijk12345',
-                    'name'      => 'Matias',
-                    'country'   => 'Argentina',
-                    'painter'   => 'Monalisa',
-                    'date'      => '1993-01-01',
-                    'style'     => 'Clasico',
-                    'width'     => 1000
-                ]
-            ]
-        ]);
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->patchJson(route('api.v1.paintings.update', $painting), [
+                            'data' => [
+                                'type' => 'paintings',
+                                'attributes' => [
+                                    'code'      => 'abcdefghijk12345',
+                                    'name'      => 'Matias',
+                                    'country'   => 'Argentina',
+                                    'painter'   => 'Monalisa',
+                                    'date'      => '1993-01-01',
+                                    'style'     => 'Clasico',
+                                    'width'     => 1000
+                                ]
+                            ]
+                        ]);
 
         $response->assertJsonValidationErrors('data.attributes.hight');
     }

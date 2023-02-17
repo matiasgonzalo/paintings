@@ -29,12 +29,14 @@ class PaginatePaintingsTest extends TestCase
         $paintings = factory(Painting::class, 6)->create();
 
         // paintings?page[size]=2&page[number]=2
-        $response = $this->getJson(route('api.v1.paintings.index', [
-            'page' => [
-                'size' => 2,
-                'number' => 2
-            ]
-        ]));
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->getJson(route('api.v1.paintings.index', [
+                            'page' => [
+                                'size' => 2,
+                                'number' => 2
+                            ]
+                        ]));
 
         $response->assertSee(
             $paintings[2]->name,

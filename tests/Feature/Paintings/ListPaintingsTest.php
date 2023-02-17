@@ -28,7 +28,9 @@ class ListPaintingsTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $response = $this->getJson(route('api.v1.paintings.show', $painting));
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->getJson(route('api.v1.paintings.show', $painting));
 
         $response->assertExactJson([
             'data' => [
@@ -65,7 +67,9 @@ class ListPaintingsTest extends TestCase
 
         $paintings = factory(Painting::class, 3)->create();
 
-        $response = $this->getJson(route('api.v1.paintings.index'));
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->getJson(route('api.v1.paintings.index'));
 
         $response->assertJson([
             'data' => [

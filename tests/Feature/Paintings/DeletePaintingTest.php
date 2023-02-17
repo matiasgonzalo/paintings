@@ -28,7 +28,9 @@ class DeletePaintingTest extends TestCase
 
         $painting = factory(Painting::class)->create();
 
-        $this->deleteJson(route('api.v1.paintings.destroy', $painting))
+        $this->withHeaders([
+            'X-HTTP-USER-ID' => $ruben->id
+        ])->deleteJson(route('api.v1.paintings.destroy', $painting))
             ->assertNoContent();
 
         $this->assertDeleted($painting);

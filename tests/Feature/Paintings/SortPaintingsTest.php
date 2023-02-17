@@ -38,7 +38,9 @@ class SortPaintingsTest extends TestCase
             'name' => 'B name'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'name']))
+        $this->withHeaders([
+                    'X-HTTP-USER-ID' => $ruben->id
+                ])->getJson(route('api.v1.paintings.index', ['sort' => 'name']))
                 ->assertSeeInOrder([
                     'A name',
                     'B name',
@@ -70,7 +72,9 @@ class SortPaintingsTest extends TestCase
             'name' => 'B name'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => '-name']))
+        $this->withHeaders([
+                    'X-HTTP-USER-ID' => $ruben->id
+                ])->getJson(route('api.v1.paintings.index', ['sort' => '-name']))
                 ->assertSeeInOrder([
                     'C name',
                     'B name',
@@ -102,12 +106,14 @@ class SortPaintingsTest extends TestCase
             'painter' => 'B painter'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'painter']))
-                ->assertSeeInOrder([
-                    'A painter',
-                    'B painter',
-                    'C painter'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => 'painter']))
+            ->assertSeeInOrder([
+                'A painter',
+                'B painter',
+                'C painter'
+            ]);
     }
 
     /** @test */
@@ -134,12 +140,14 @@ class SortPaintingsTest extends TestCase
             'painter' => 'B painter'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => '-painter']))
-                ->assertSeeInOrder([
-                    'C painter',
-                    'B painter',
-                    'A painter'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => '-painter']))
+            ->assertSeeInOrder([
+                'C painter',
+                'B painter',
+                'A painter'
+            ]);
     }
 
     /** @test */
@@ -166,12 +174,14 @@ class SortPaintingsTest extends TestCase
             'country' => 'B country'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'country']))
-                ->assertSeeInOrder([
-                    'A country',
-                    'B country',
-                    'C country'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => 'country']))
+            ->assertSeeInOrder([
+                'A country',
+                'B country',
+                'C country'
+            ]);
     }
 
     /** @test */
@@ -198,12 +208,14 @@ class SortPaintingsTest extends TestCase
             'country' => 'B country'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => '-country']))
-                ->assertSeeInOrder([
-                    'C country',
-                    'B country',
-                    'A country'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => '-country']))
+            ->assertSeeInOrder([
+                'C country',
+                'B country',
+                'A country'
+            ]);
     }
 
     /** @test */
@@ -230,12 +242,14 @@ class SortPaintingsTest extends TestCase
             'date' => '2021-01-01'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'date']))
-                ->assertSeeInOrder([
-                    '2019-01-01',
-                    '2021-01-01',
-                    '2022-01-01'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => 'date']))
+            ->assertSeeInOrder([
+                '2019-01-01',
+                '2021-01-01',
+                '2022-01-01'
+            ]);
     }
 
     /** @test */
@@ -262,12 +276,14 @@ class SortPaintingsTest extends TestCase
             'date' => '2021-01-01'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => '-date']))
-                ->assertSeeInOrder([
-                    '2022-01-01',
-                    '2021-01-01',
-                    '2019-01-01'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => '-date']))
+            ->assertSeeInOrder([
+                '2022-01-01',
+                '2021-01-01',
+                '2019-01-01'
+            ]);
     }
 
     /** @test */
@@ -294,12 +310,14 @@ class SortPaintingsTest extends TestCase
             'style' => 'B style'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'style']))
-                ->assertSeeInOrder([
-                    'A style',
-                    'B style',
-                    'C style'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => 'style']))
+            ->assertSeeInOrder([
+                'A style',
+                'B style',
+                'C style'
+            ]);
     }
 
     /** @test */
@@ -326,12 +344,14 @@ class SortPaintingsTest extends TestCase
             'style' => 'B style'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => '-style']))
-                ->assertSeeInOrder([
-                    'C style',
-                    'B style',
-                    'A style'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => '-style']))
+            ->assertSeeInOrder([
+                'C style',
+                'B style',
+                'A style'
+            ]);
     }
 
     /** @test */
@@ -361,12 +381,14 @@ class SortPaintingsTest extends TestCase
             'style'     => 'C style'
         ]);
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'painter,-style']))
-                ->assertSeeInOrder([
-                    'C style',
-                    'A style',
-                    'B style'
-                ]);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => 'painter,-style']))
+            ->assertSeeInOrder([
+                'C style',
+                'A style',
+                'B style'
+            ]);
     }
 
     /** @test */
@@ -383,7 +405,9 @@ class SortPaintingsTest extends TestCase
 
         factory(Painting::class, 3)->create();
 
-        $this->getJson(route('api.v1.paintings.index', ['sort' => 'code']))
-                ->assertStatus(400);
+        $this->withHeaders([
+                'X-HTTP-USER-ID' => $ruben->id
+            ])->getJson(route('api.v1.paintings.index', ['sort' => 'code']))
+            ->assertStatus(400);
     }
 }

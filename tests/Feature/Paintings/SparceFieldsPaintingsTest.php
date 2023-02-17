@@ -29,11 +29,13 @@ class SparceFieldsPaintingsTest extends TestCase
         $painting = factory(Painting::class)->create();
 
         //paintings?fields[paintings]=name,painter
-        $response = $this->getJson(route('api.v1.paintings.index', [
-            'fields' => [
-                'paintings' => 'name,painter'
-            ]
-        ]));
+        $response = $this->withHeaders([
+                            'X-HTTP-USER-ID' => $ruben->id
+                        ])->getJson(route('api.v1.paintings.index', [
+                            'fields' => [
+                                'paintings' => 'name,painter'
+                            ]
+                        ]));
 
         $response->assertJsonFragment([
             'name' => $painting->name,

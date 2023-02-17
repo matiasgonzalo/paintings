@@ -15,6 +15,8 @@ un rol particular.
 
 - Esta aplicación debe ser una API RESTful.
 - Deberá tener los endpoints necesarios para “Crear”, “Consultar”, “Modificar” y “Borrar”.
+- Recibirá por el header **X-HTTP-USER-ID** el **ID** del **usuario** que desea usar este
+recurso.
 - Es importante que se pueda “Consultar” el listado de “Cuadros” filtrando por cualquier campo y que
   permita elegir qué campos mostrar en la respuesta.
 
@@ -65,6 +67,7 @@ un rol particular.
 ``curl --location 'http://localhost:8095/api/v1/paintings/30' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-http-user-id: 1' \
 --header 'Authorization: Bearer token' \
 --data ''``
 - Muestra un listado: (GET) **[http://localhost:8095/api/v1/paintings](http://localhost:8095/api/v1/paintings)**
@@ -72,6 +75,7 @@ un rol particular.
 ``curl --location 'http://localhost:8095/api/v1/paintings' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-http-user-id: 1' \
 --header 'Authorization: Bearer token' \
 --data ''``
 - Muestra un listado ordenado por campos específicos (name) ascendente: (GET) **[http://localhost:8095/api/v1/paintings?sort=name](http://localhost:8095/api/v1/paintings?sort=name)**
@@ -86,6 +90,7 @@ un rol particular.
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
 --header 'Authorization: Bearer token' \
+--header 'x-http-user-id: 1' \
 --data '{
     "data" : {
         "type" : "paintings",
