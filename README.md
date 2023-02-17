@@ -7,72 +7,130 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## Sobre el proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Usando PHP/Laravel desarrollar una aplicación que maneje el recurso “Cuadros”
+los cuales solo puedan ser accedidos por determinados “Usuarios” que tengan
+un rol particular.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Esta aplicación debe ser una API RESTful.
+- Deberá tener los endpoints necesarios para “Crear”, “Consultar”, “Modificar” y “Borrar”.
+- Es importante que se pueda “Consultar” el listado de “Cuadros” filtrando por cualquier campo y que
+  permita elegir qué campos mostrar en la respuesta.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Caracteristicas Esenciales
 
-## Learning Laravel
+#### - El proyecto cuenta con la configuración necesaria para realizar el deploy mediante **DOCKER-COMPOSE**
+#### - El proyecto cuenta con la configuración necesaria en el archivo **.env.example** para acceder a una base de datos POSTGRES dentro del contenedor.
+### Packages Externos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- laravel/passport
+- spatie/laravel-permission
+## Despliegue
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Clonar el repositorio en el entorno deseado: ``git clone git@github.com:matiasgonzalo/paintings.git matiasAcostaChallenge``
+- Acceder al directorio del proyecto y copiar el archivo **.env.example** y renombrarlo por **.env**
+- Construir y levantar el contenedor con los recursos necesarios: ``docker-compose up -d``
+- Acceder al contenedor: ``docker-compose exec extendeal_webapp bash``
+- Instalar dependencias: ``composer install``
+- Generar la key del proyecto: ``php artisan key:generate``
+- Ejecutar migraciones y seeders con datos de prueba: ``php artisan migrate --seed``
+- Instalar passport: ``php artisan passport:install``
 
-## Laravel Sponsors
+#### - Se crearán tres usuarios **Ruben**, **Matias** y **Gonzalo** con los roles **OWNER** para los usuarios **Ruben**, y **EMPLOYEE** para el usuario **Matias** y **Gonzalo**.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### - Se crearán **20** objetos de la clase **Painting** *(Cuadro)*.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+## Estructa de rutas disponibles
 
-## Contributing
+### **Relacionadas a la Autenticación**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Login: (GET) **[http://localhost:8095/api/v1/oauth/login](http://localhost:8095/api/v1/oauth/login)**
+- Ejemplo:
+``curl --location 'http://localhost:8095/api/v1/oauth/login' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    "email":"ruben@gmail.com",
+    "password":"password"
+}'``
 
-## Code of Conduct
+### **Relacionadas al recurso Painting (Cuadro)** *(solo accedidas a partir de un usuario con Rol OWNER)*
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Muestra un recurso: (GET) **[http://localhost:8095/api/v1/paintings/1](http://localhost:8095/api/v1/paintings/1)**
+- Ejemplo:
+``curl --location 'http://localhost:8095/api/v1/paintings/30' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer token' \
+--data ''``
+- Muestra un listado: (GET) **[http://localhost:8095/api/v1/paintings](http://localhost:8095/api/v1/paintings)**
+- Ejemplo:
+``curl --location 'http://localhost:8095/api/v1/paintings' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer token' \
+--data ''``
+- Almacena un recurso: (POST) **[http://localhost:8095/api/v1/paintings](http://localhost:8095/api/v1/paintings)**
+- Ejemplo:
+``curl --location 'http://localhost:8095/api/v1/paintings' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer token' \
+--data '{
+    "data" : {
+        "type" : "paintings",
+        "attributes" : {
+            "code"      : "abcdefghijk12345",
+            "name"      : "Matias",
+            "painter"   : "Monalisa",
+            "country"   : "Argentina",
+            "date"      : "1993-01-01",
+            "style"     : "Clasico",
+            "width"     : 1000,
+            "hight"     : 1000
+        }
+    }
+}'``
+- Actualiza un recurso: (PATCH) **[http://localhost:8095/api/v1/paintings/1](http://localhost:8095/api/v1/paintings/1)**
+``curl --location --request PATCH 'http://localhost:8095/api/v1/paintings/1' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer token' \
+--data '{
+    "data" : {
+        "type" : "paintings",
+        "attributes" : {
+            "code"      : "abcdefghijk12345",
+            "name"      : "Matias",
+            "painter"   : "Monalisa",
+            "country"   : "Argentina",
+            "date"      : "1993-01-01",
+            "style"     : "Clasico",
+            "width"     : 1000,
+            "hight"     : 1000
+        }
+    }
+}'``
+- Elimina un recurso: (DELETE) **[http://localhost:8095/api/v1/paintings/1](http://localhost:8095/api/v1/paintings/1)**
+``curl --location --request DELETE 'http://localhost:8095/api/v1/paintings/1' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer token'``
 
-## Security Vulnerabilities
+### **Relacionadas al recurso User** *(solo accedidas a partir de un usuario autenticado)*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Muestra un recurso: (GET) **[http://localhost:8095/api/v1/users/1](http://localhost:8095/api/v1/users/1)**
+- Muestra un listado: (GET) **[http://localhost:8095/api/v1/users](http://localhost:8095/api/v1/users)**
+- Almacena un recurso: (POST) **[http://localhost:8095/api/v1/users](http://localhost:8095/api/v1/users)**
 
-## License
+## Testing *(58 tests, 157 aserciones)*
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Acceder al contenedor: ``docker-compose exec extendeal_webapp bash``
+- Ejecutar todos los test automáticos: ``./vendor/bin/phpunit``
+- Ejecutar test de clases especificas: ``./vendor/bin/phpunit --filter CreatePaintingTest``
+- Ejecutar test de funciones especificas: ``./vendor/bin/phpunit --filter CreatePaintingTest::can_create_painting``
+
+## Autor
+
+Este proyecto fue desarrollado por [Acosta Matias Gonzalo](https://github.com/matiasgonzalo).
