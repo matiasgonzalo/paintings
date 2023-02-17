@@ -6,7 +6,7 @@ Route::prefix('oauth')->group(function () {
         Route::post('/login', 'AuthController@login');
 });
 
-Route::middleware(['auth:api', 'role:OWNER'])->group(function () {
+Route::middleware(['auth:api', 'role:OWNER', 'verify_header_key'])->group(function () {
         Route::get('paintings/{painting}', 'PaintingController@show')
                 ->name('api.v1.paintings.show');
 
@@ -23,7 +23,7 @@ Route::middleware(['auth:api', 'role:OWNER'])->group(function () {
                 ->name('api.v1.paintings.destroy');
 });
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'verify_header_key'])->group(function () {
         Route::get('users/{user}', 'UserController@show')
                 ->name('api.v1.users.show');
 
