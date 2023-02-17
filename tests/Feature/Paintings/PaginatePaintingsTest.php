@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paintings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class PaginatePaintingsTest extends TestCase
     /** @test */
     public function can_paginate_paintings()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $paintings = factory(Painting::class, 6)->create();
 
         // paintings?page[size]=2&page[number]=2

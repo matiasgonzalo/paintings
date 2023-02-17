@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paintings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function can_update_paintings()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -65,6 +77,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function code_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -88,6 +109,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function name_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -111,6 +141,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function painter_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -134,6 +173,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function country_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -157,6 +205,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function date_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -180,6 +237,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function style_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -203,6 +269,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function width_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [
@@ -226,6 +301,15 @@ class UpdatePaintingTest extends TestCase
     /** @test */
     public function hight_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->patchJson(route('api.v1.paintings.update', $painting), [

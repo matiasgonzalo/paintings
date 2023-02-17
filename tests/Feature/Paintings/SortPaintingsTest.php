@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paintings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_name()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'name' => 'C name'
         ]);
@@ -37,6 +49,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_name_descending()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'name' => 'C name'
         ]);
@@ -60,6 +81,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_painter()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'painter' => 'C painter'
         ]);
@@ -83,6 +113,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_painter_descending()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'painter' => 'C painter'
         ]);
@@ -106,6 +145,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_country()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'country' => 'C country'
         ]);
@@ -129,6 +177,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_country_descending()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'country' => 'C country'
         ]);
@@ -152,6 +209,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_date()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'date' => '2022-01-01'
         ]);
@@ -175,6 +241,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_date_descending()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'date' => '2022-01-01'
         ]);
@@ -198,6 +273,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_style()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'style' => 'C style'
         ]);
@@ -221,6 +305,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_style_descending()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'style' => 'C style'
         ]);
@@ -244,6 +337,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function can_sort_paintings_by_painter_and_style()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'painter'   => 'A painter',
             'style'     => 'A style'
@@ -270,6 +372,15 @@ class SortPaintingsTest extends TestCase
     /** @test */
     public function cannot_sort_paintings_by_unallowed_fields()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class, 3)->create();
 
         $this->getJson(route('api.v1.paintings.index', ['sort' => 'code']))

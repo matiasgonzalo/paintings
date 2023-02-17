@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paintings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class SparceFieldsPaintingsTest extends TestCase
     /** @test */
     public function specific_fields_can_be_requested()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         //paintings?fields[paintings]=name,painter

@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paintings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_name()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'name' => 'My painting'
         ]);
@@ -38,6 +50,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_painter()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'painter' => 'Matias'
         ]);
@@ -62,6 +83,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_year()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'date' => '2023-01-01'
         ]);
@@ -86,6 +116,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_month()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'date' => '2023-05-01'
         ]);
@@ -110,6 +149,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_day()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'date' => '2023-01-28'
         ]);
@@ -134,6 +182,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_date()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'date' => '2023-01-01'
         ]);
@@ -158,6 +215,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_country()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'country' => 'Argentina'
         ]);
@@ -182,6 +248,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_style()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'style' => 'Clasico'
         ]);
@@ -206,6 +281,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_width()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'width' => 1500
         ]);
@@ -230,6 +314,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function can_filter_paintings_by_hight()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class)->create([
             'hight' => 3000
         ]);
@@ -254,6 +347,15 @@ class FilterPaintingsTest extends TestCase
     /** @test */
     public function cannot_filter_paintings_by_unknown_filters()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         factory(Painting::class, 2)->create();
 
         // paintings?filter[unknown]=unknown

@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Users;
 
+use App\Role;
 use App\User;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +16,15 @@ class CreateUserTest extends TestCase
     /** @test */
     public function can_create_user()
     {
+        $matias = factory(User::class)->create(['name' => 'Matias', 'email' => 'matias@gmail.com']);
+        Role::create(['name' => 'EMPLOYEE']);
+        $matias->assignRole("EMPLOYEE");
+
+        Passport::actingAs(
+            $matias,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.users.store'), [
             'data' => [
                 'type' => 'users',
@@ -27,7 +38,7 @@ class CreateUserTest extends TestCase
 
         $response->assertCreated();
 
-        $user = User::first();
+        $user = User::whereName('David')->first();
 
         $response->assertHeader(
             'Location',
@@ -52,6 +63,15 @@ class CreateUserTest extends TestCase
     /** @test */
     public function name_is_required()
     {
+        $matias = factory(User::class)->create(['name' => 'Matias', 'email' => 'matias@gmail.com']);
+        Role::create(['name' => 'EMPLOYEE']);
+        $matias->assignRole("EMPLOYEE");
+
+        Passport::actingAs(
+            $matias,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.users.store'), [
             'data' => [
                 'type' => 'users',
@@ -68,6 +88,15 @@ class CreateUserTest extends TestCase
     /** @test */
     public function email_is_required()
     {
+        $matias = factory(User::class)->create(['name' => 'Matias', 'email' => 'matias@gmail.com']);
+        Role::create(['name' => 'EMPLOYEE']);
+        $matias->assignRole("EMPLOYEE");
+
+        Passport::actingAs(
+            $matias,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.users.store'), [
             'data' => [
                 'type' => 'users',
@@ -84,6 +113,15 @@ class CreateUserTest extends TestCase
     /** @test */
     public function password_is_required()
     {
+        $matias = factory(User::class)->create(['name' => 'Matias', 'email' => 'matias@gmail.com']);
+        Role::create(['name' => 'EMPLOYEE']);
+        $matias->assignRole("EMPLOYEE");
+
+        Passport::actingAs(
+            $matias,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.users.store'), [
             'data' => [
                 'type' => 'users',

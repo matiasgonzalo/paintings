@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paintings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function can_create_painting()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -63,6 +75,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function code_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -84,6 +105,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function name_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -105,6 +135,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function painter_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -126,6 +165,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function country_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -147,6 +195,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function date_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -168,6 +225,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function style_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -189,6 +255,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function width_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',
@@ -210,6 +285,15 @@ class CreatePaintingTest extends TestCase
     /** @test */
     public function hight_is_required()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $response = $this->postJson(route('api.v1.paintings.store'), [
             'data' => [
                 'type' => 'paintings',

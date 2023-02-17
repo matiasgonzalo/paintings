@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Users;
 
+use App\Role;
 use App\User;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,11 +16,20 @@ class ListUsersTest extends TestCase
     /** @test */
     public function can_fetch_a_single_user()
     {
+        $matias = factory(User::class)->create(['name' => 'Matias', 'email' => 'matias@gmail.com']);
+        Role::create(['name' => 'EMPLOYEE']);
+        $matias->assignRole("EMPLOYEE");
+
+        Passport::actingAs(
+            $matias,
+            ['create-servers']
+        );
+
         $user = factory(User::class)->create();
 
         $response = $this->getJson(route('api.v1.users.show', $user));
 
-        $response->assertExactJson([
+        $response->assertJson([
             'data' => [
                 'type' => 'users',
                 'id' => $user->getRouteKey(),
@@ -36,7 +47,18 @@ class ListUsersTest extends TestCase
     /** @test */
     public function can_fetch_all_users()
     {
-        $users = factory(User::class, 3)->create();
+        $matias = factory(User::class)->create(['name' => 'Matias', 'email' => 'matias@gmail.com']);
+        Role::create(['name' => 'EMPLOYEE']);
+        $matias->assignRole("EMPLOYEE");
+
+        Passport::actingAs(
+            $matias,
+            ['create-servers']
+        );
+
+        factory(User::class, 3)->create();
+
+        $users = User::all();
 
         $response = $this->getJson(route('api.v1.users.index'));
 

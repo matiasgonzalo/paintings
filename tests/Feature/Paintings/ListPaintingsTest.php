@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Paitings;
 
+use App\Role;
+use App\User;
 use App\Painting;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,6 +17,15 @@ class ListPaintingsTest extends TestCase
     /** @test */
     public function can_fetch_a_single_painting()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $painting = factory(Painting::class)->create();
 
         $response = $this->getJson(route('api.v1.paintings.show', $painting));
@@ -42,6 +54,15 @@ class ListPaintingsTest extends TestCase
     /** @test */
     public function can_fetch_all_paintings()
     {
+        $ruben = factory(User::class)->create(['name' => 'Ruben', 'email' => 'ruben@gmail.com']);
+        Role::create(['name' => 'OWNER']);
+        $ruben->assignRole("OWNER");
+
+        Passport::actingAs(
+            $ruben,
+            ['create-servers']
+        );
+
         $paintings = factory(Painting::class, 3)->create();
 
         $response = $this->getJson(route('api.v1.paintings.index'));
