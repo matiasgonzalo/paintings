@@ -57,6 +57,9 @@ un rol particular.
 
 ### **Relacionadas al recurso Painting (Cuadro)** *(solo accedidas a partir de un usuario con Rol OWNER)*
 
+#### Campos disponibles para ordenamiento: 'name', 'painter', 'date', 'style', 'country'.
+#### Campos disponibles para filtros: 'name', 'painter', 'country', 'date', 'day', 'month', 'year', 'style', 'width', 'hight'.
+
 - Muestra un recurso: (GET) **[http://localhost:8095/api/v1/paintings/1](http://localhost:8095/api/v1/paintings/1)**
 - Ejemplo:
 ``curl --location 'http://localhost:8095/api/v1/paintings/30' \
@@ -71,6 +74,12 @@ un rol particular.
 --header 'Accept: application/json' \
 --header 'Authorization: Bearer token' \
 --data ''``
+- Muestra un listado ordenado por campos específicos (name) ascendente: (GET) **[http://localhost:8095/api/v1/paintings?sort=name](http://localhost:8095/api/v1/paintings?sort=name)**
+- Muestra un listado ordenado por campos específicos (name) descendete: (GET) **[http://localhost:8095/api/v1/paintings?sort=-name](http://localhost:8095/api/v1/paintings?sort=-name)**
+- Muestra un listado ordenado por multiples campos (name, painter): (GET) **[http://localhost:8095/api/v1/paintings?sort=-name,painter](http://localhost:8095/api/v1/paintings?sort=-name,painter)**
+- Muestra un listado paginado: (GET) **[http://localhost:8095/api/v1/paintings?page[size]=2&page[number]=2](http://localhost:8095/api/v1/paintings?page[size]=2&page[number]=2)**
+- Muestra un listado filtrado por campos específicos: (GET) **[http://localhost:8095/api/v1/paintings?filter[year]=2022&filter[mounth]=02](http://localhost:8095/api/v1/paintings?filter[year]=2022&filter[mounth]=02)**
+- Muestra un listado compuesto por campos específicos: (GET) **[http://localhost:8095/api/v1/paintings?fields[paintings]=name,painter](http://localhost:8095/api/v1/paintings?fields[paintings]=name,painter)**
 - Almacena un recurso: (POST) **[http://localhost:8095/api/v1/paintings](http://localhost:8095/api/v1/paintings)**
 - Ejemplo:
 ``curl --location 'http://localhost:8095/api/v1/paintings' \
@@ -120,8 +129,17 @@ un rol particular.
 
 ### **Relacionadas al recurso User** *(solo accedidas a partir de un usuario autenticado)*
 
+#### Campos disponibles para ordenamiento: 'name', 'email'.
+#### Campos disponibles para filtros: 'name', 'email'.
+
 - Muestra un recurso: (GET) **[http://localhost:8095/api/v1/users/1](http://localhost:8095/api/v1/users/1)**
 - Muestra un listado: (GET) **[http://localhost:8095/api/v1/users](http://localhost:8095/api/v1/users)**
+- Muestra un listado ordenado por campos específicos (name) ascendente: (GET) **[http://localhost:8095/api/v1/users?sort=name](http://localhost:8095/api/v1/users?sort=name)**
+- Muestra un listado ordenado por campos específicos (name) descendete: (GET) **[http://localhost:8095/api/v1/users?sort=-name](http://localhost:8095/api/v1/users?sort=-name)**
+- Muestra un listado ordenado por multiples campos (name, email): (GET) **[http://localhost:8095/api/v1/users?sort=-name,email](http://localhost:8095/api/v1/users?sort=-name,email)**
+- Muestra un listado paginado: (GET) **[http://localhost:8095/api/v1/users?page[size]=2&page[number]=2](http://localhost:8095/api/v1/users?page[size]=2&page[number]=2)**
+- Muestra un listado filtrado por campos específicos: (GET) **[http://localhost:8095/api/v1/users?filter[name]=Matias&filter[email]=matias](http://localhost:8095/api/v1/users?filter[name]=Matias&filter[email]=matias)**
+- Muestra un listado compuesto por campos específicos: (GET) **[http://localhost:8095/api/v1/users?fields[users]=name](http://localhost:8095/api/v1/users?fields[users]=name)**
 - Almacena un recurso: (POST) **[http://localhost:8095/api/v1/users](http://localhost:8095/api/v1/users)**
 
 ## Testing *(58 tests, 157 aserciones)*
