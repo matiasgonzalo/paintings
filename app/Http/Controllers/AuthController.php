@@ -23,7 +23,7 @@ class AuthController extends Controller
             $response = AuthService::getToken($request);
             return response()->json(['data' => $response], 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return response()->json(['message' => $e->getMessage(), 'code' => $e->getCode()], $e->getCode());
         }
     }
 }

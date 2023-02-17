@@ -3,14 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('oauth')->group(function () {
-        // passport
         Route::post('/login', 'AuthController@login');
-        Route::post('/resetpass', 'AuthController@sendResetLinkEmail');
-        Route::get('/find/{token}', 'AuthController@showResetForm');
-        Route::post('/reset', 'AuthController@reset');
 });
 
-Route::middleware([])->group(function () {
+Route::middleware(['auth:api', 'role:OWNER'])->group(function () {
         Route::get('paintings/{painting}', 'PaintingController@show')
                 ->name('api.v1.paintings.show');
 
@@ -25,7 +21,9 @@ Route::middleware([])->group(function () {
 
         Route::delete('paintings/{painting}', 'PaintingController@destroy')
                 ->name('api.v1.paintings.destroy');
+});
 
+Route::middleware(['auth:api'])->group(function () {
         Route::get('users/{user}', 'UserController@show')
                 ->name('api.v1.users.show');
 

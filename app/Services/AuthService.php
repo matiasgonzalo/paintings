@@ -33,10 +33,10 @@ class AuthService {
                         'token_type'=>'Bearer'
                     ];
                 } else {
-                    abort(422);
+                    throw new \Exception('Usuario y/o contraseña incorrectos.', 404);
                 }
             }
-            abort(404);
+            throw new \Exception('Usuario y/o contraseña incorrectos.', 404);
         } catch (\Exception $e) {
             throw($e);
         }

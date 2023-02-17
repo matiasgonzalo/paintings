@@ -9,6 +9,7 @@ use App\Http\Resources\PaintingResource;
 use App\Http\Resources\PaintingCollection;
 use App\Http\Requests\PaintingStoreRequest;
 use App\Http\Requests\PaintingUpdateRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PaintingController extends Controller
 {
@@ -43,7 +44,7 @@ class PaintingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Painting  $painting
+     * @param  Painting  $painting
      * @return PaintingResource
      */
     public function show(Painting $painting) :PaintingResource
