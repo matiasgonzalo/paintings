@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof HttpException) {
-            return response()->json(['message' => 'Unauthorized action', 'code' => 403], 403);
+            return response()->json(['message' => 'Bad Request', 'code' => 400], 400);
         }
 
         return parent::render($request, $exception);
