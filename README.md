@@ -9,15 +9,15 @@
 
 ## Sobre el proyecto
 
-Usando PHP/Laravel desarrollar una aplicación que maneje el recurso “Cuadros”
+Usando PHP/Laravel gestiona el recurso “Cuadros”
 los cuales solo puedan ser accedidos por determinados “Usuarios” que tengan
 un rol particular.
 
-- Esta aplicación debe ser una API RESTful.
-- Deberá tener los endpoints necesarios para “Crear”, “Consultar”, “Modificar” y “Borrar”.
-- Recibirá por el header **X-HTTP-USER-ID** el **ID** del **usuario** que desea usar este
+- Esta aplicación es una API RESTful.
+- Tiene los endpoints necesarios para “Crear”, “Consultar”, “Modificar” y “Borrar”.
+- Recibe en el header de cada solicitud **X-HTTP-USER-ID** el **ID** del **usuario** que desea usar este
 recurso.
-- Es importante que se pueda “Consultar” el listado de “Cuadros” filtrando por cualquier campo y que
+- Se pueda “Consultar” el listado de “Cuadros” filtrando por cualquier campo y
   permita elegir qué campos mostrar en la respuesta.
 
 ## Caracteristicas Esenciales
